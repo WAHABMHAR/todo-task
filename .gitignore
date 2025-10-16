@@ -1,0 +1,50 @@
+
+
+# Node modules (ignore everywhere)
+node_modules/
+**/node_modules/
+
+# Environment files
+.env
+**/.env
+
+# Build output (React / Vite / Next / TypeScript)
+dist/
+build/
+**/dist/
+**/build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Temporary files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS system files
+*.swp
+*.swo
+
+# Optional: TypeScript cache
+*.tsbuildinfo
+
+# Optional: Ignore uploads or temp files
+uploads/
+temp/
+**/uploads/
+**/temp/
+
+# Keep these important files even if matched
+!.gitignore
+!README.md
+!.env.example
