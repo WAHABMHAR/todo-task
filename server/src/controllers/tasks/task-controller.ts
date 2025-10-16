@@ -5,7 +5,23 @@ import Task from "../../models/task/task-model.js";
 export const getAllTasks = async (req: any, res: Response, next: NextFunction): Promise<any> => {
     const user = req.user;
     try {
-        const results = await Task.find({ user: user?._id }).lean();
+        const results = await Task.find(
+            { user: user?._id },
+            "title description status dueDate user"
+        ).lean();
+
+        return simpleResponseData(res, 200, "All Tasks fetched successfully", results);
+    } catch (error) {
+        next(error);
+    }
+};
+export const getTask = async (req: any, res: Response, next: NextFunction): Promise<any> => {
+    const { id: taskId } = req.params;
+    try {
+        const results = await Task.findOne(
+            { _id: taskId },
+            "title description status dueDate user"
+        ).lean();
 
         return simpleResponseData(res, 200, "All Tasks fetched successfully", results);
     } catch (error) {
@@ -30,6 +46,19 @@ export const updateTask = async (req: any, res: Response, next: NextFunction): P
         const { id: taskId } = req.params;
 
         const updated = await Task.findByIdAndUpdate(taskId, req.body);
+
+        console.log("Results", updated);
+
+        return simpleResponseData(res, 200, "Task updated successfully", updated);
+    } catch (error) {
+        next(error);
+    }
+};
+export const updateStatus = async (req: any, res: Response, next: NextFunction): Promise<any> => {
+    try {
+        const { id: taskId, status } = req.body;
+
+        const updated = await Task.findByIdAndUpdate(taskId, { $set: { status: status } });
 
         console.log("Results", updated);
 

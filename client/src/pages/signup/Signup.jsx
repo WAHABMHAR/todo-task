@@ -20,7 +20,7 @@ export default function Signup() {
             }
         } catch (err) {
             notification.error({
-                message: err?.data?.message,
+                message: err?.data?.message || err?.message,
             });
             form.resetFields();
         }
@@ -56,7 +56,12 @@ export default function Signup() {
                         autoComplete="new-email"
                         rules={[{ required: true, message: "Please input your email!" }]}
                     >
-                        <Input prefix={<MailOutlined />} placeholder="Email" size="large" />
+                        <Input
+                            prefix={<MailOutlined />}
+                            placeholder="Email"
+                            size="large"
+                            type="email"
+                        />
                     </Form.Item>
 
                     <Form.Item
@@ -68,6 +73,7 @@ export default function Signup() {
                             prefix={<LockOutlined />}
                             placeholder="Password"
                             size="large"
+                            minLength={8}
                         />
                     </Form.Item>
 
@@ -90,6 +96,7 @@ export default function Signup() {
                             prefix={<LockOutlined />}
                             placeholder="Confirm Password"
                             size="large"
+                            minLength={8}
                         />
                     </Form.Item>
 
@@ -106,7 +113,6 @@ export default function Signup() {
                     </Form.Item>
 
                     <div className="flex justify-between text-sm text-gray-600">
-                        <Link to="/forget-password">Forgot password?</Link>
                         <p className="mt-4 text-center text-gray-600 text-sm">
                             Already have an account?{" "}
                             <Link

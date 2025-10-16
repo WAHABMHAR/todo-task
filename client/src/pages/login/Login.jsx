@@ -6,7 +6,6 @@ import { setLocalStorage } from "../../utils/utils";
 import { useLoginMutation } from "../../services/auth/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, setUser } from "../../store/slices/auth/authSlice";
-import NewsletterModal from "../../components/NewsLetter/NewsLetter";
 
 export default function Login() {
     const [login, { isLoading }] = useLoginMutation();
@@ -79,7 +78,6 @@ export default function Login() {
                     </Form.Item>
 
                     <div className="flex justify-between text-sm text-gray-600">
-                        <Link to="/forget-password">Forgot password?</Link>
                         <p className="mt-4 text-center text-gray-600 text-sm">
                             Don't have an account?{" "}
                             <Link
@@ -92,9 +90,6 @@ export default function Login() {
                     </div>
                 </Form>
             </div>
-            {false && (
-                <NewsletterModal open={showModal} onClose={() => setShowModal(false)} user={user} />
-            )}
         </div>
     );
 }
