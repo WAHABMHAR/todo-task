@@ -1,10 +1,22 @@
-import { Space, Table, Tag, Tooltip } from "antd";
+import { Form, Space, Table, Tag, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { tasks } from "../../utils/utils";
 import dayjs from "dayjs";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import AddTask from "../../components/addTask/AddTask";
 
 export default function TaskTable() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [form] = Form.useForm();
+
+    const handleAdd = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+        form.resetFields();
+    };
     // const [tasks, setTasks] = useState([]);
     //   useEffect(() => {
     //     API.get("/tasks").then(res => setTasks(res.data));
@@ -27,7 +39,7 @@ export default function TaskTable() {
                     <Tooltip title="Add New Task">
                         <PlusOutlined
                             style={{ color: "#52c41a", cursor: "pointer" }}
-                            onClick={() => handleAdd(record)}
+                            onClick={() => handleAdd()}
                         />
                     </Tooltip>
                     <Tooltip title="Edit Task">
@@ -49,13 +61,22 @@ export default function TaskTable() {
     ];
 
     return (
-        <div className="flex justify-center items-center mt-3">
-            <div className="container">
-                {" "}
-                <div className="table-wrapper border p-4 bg-white rounded-md shadow-md !m-4 !p-4">
-                    <Table columns={columns} dataSource={tasks} rowKey="_id" />
+        <>
+            <div className="flex justify-center items-center mt-3">
+                <div className="container">
+                    {" "}
+                    <div className="table-wrapper border p-4 bg-white rounded-md shadow-md !m-4 !p-4">
+                        <Table columns={columns} dataSource={tasks} rowKey="_id" />
+                    </div>
                 </div>
             </div>
-        </div>
+            {isModalOpen && (
+                <AddTask
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    handleCancel={handleCancel}
+                />
+            )}
+        </>
     );
 }
