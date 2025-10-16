@@ -4,14 +4,18 @@ import {
     createTask,
     deleteTask,
     getAllTasks,
+    getTask,
+    updateStatus,
     updateTask,
 } from "../../controllers/tasks/task-controller.js";
 
 const router = Router();
 
 router.get("/", protect, getAllTasks);
+router.get("/:id", protect, getTask);
 router.post("/", protect, createTask);
-router.patch("/", protect, updateTask);
-router.delete("/", protect, deleteTask);
+router.put("/:id", protect, updateTask);
+router.patch("/", protect, updateStatus);
+router.delete("/:id", protect, deleteTask);
 
 export default router;

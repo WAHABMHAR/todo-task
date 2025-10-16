@@ -22,7 +22,7 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
         });
 
         await verficationEmail(email, name, token);
-        return responseMessage(res, true, 201, "Check your account to verify your account");
+        return responseMessage(res, true, 201, "Check your email to verify your account");
     } catch (error: any) {
         next(error);
     }

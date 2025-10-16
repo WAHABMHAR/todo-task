@@ -13,6 +13,14 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./store/slices/auth/authSlice";
 import PublicRoute from "./components/publicRoute/PublicRoute";
 import ProtectedRoutes from "./components/protectedRoute/ProtectedRoutes";
+import weekday from "dayjs/plugin/weekday";
+import localeData from "dayjs/plugin/localeData";
+import updateLocale from "dayjs/plugin/updateLocale";
+import dayjs from "dayjs";
+
+dayjs.extend(weekday);
+dayjs.extend(localeData);
+dayjs.extend(updateLocale);
 
 function App() {
     const user = JSON.parse(localStorage.getItem("user"));

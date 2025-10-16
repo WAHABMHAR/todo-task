@@ -21,7 +21,7 @@ const taskSchema = new Schema(
             required: [true, "User Id is required"],
         },
         dueDate: {
-            type: Date,
+            type: String,
             required: [true, "Due date is required"],
         },
     },
